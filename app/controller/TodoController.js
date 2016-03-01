@@ -28,9 +28,9 @@ todoControllers.controller('todoTaskEditorCtrl',  [
 
         $scope.remove = function(taskId, index) {
             Restangular.one('tasks').one('remove').customPOST(
+                undefined,
+                undefined,
                 {taskId: taskId},
-                undefined,
-                undefined,
                 {"Content-Type":"application/json"}
                 ).then(function(response){
                     $scope.tasks = [];
