@@ -4,7 +4,7 @@ todoControllers.controller('todoTaskEditorCtrl',  [
     '$scope', 
     'TasksService',
     function($scope, TasksService) {
-        $scope.tasks = [{id:1,description:"asdasd"}];
+        $scope.tasks = [];
         $scope.task = {};
         
         $scope.addTodoTask = function(description) {
@@ -27,6 +27,5 @@ todoControllers.controller('todoTaskEditorCtrl',  [
                 $scope.findAll();
             })        
         };
-
         $scope.findAll();
 }]);
