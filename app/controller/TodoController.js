@@ -2,40 +2,30 @@ var todoControllers = angular.module('todoControllers', []);
 
 todoControllers.controller('todoTaskEditorCtrl',  [
     '$scope', 
-    'Restangular',
-    function($scope, Restangular) {
+    'TasksService',
+    function($scope, TasksService) {
         $scope.tasks = [{id:1,description:"asdasd"}];
         $scope.task = {};
         
         $scope.addTodoTask = function(description) {
             var data = {'description': description};
-            Restangular.one('tasks').one('add').customPOST(
-                data,
-                undefined,
-                undefined,
-                {"Content-Type":"application/json"}
-                ).then(function(response){
-                    $scope.tasks = [];
-                    $scope.findAll();
-                },null)
+            TasksService.addTodoTask(data,function(response){
+                $scope.tasks = [];
+                $scope.findAll();
+            });
         };
 
         $scope.findAll = function() {
-            Restangular.one('tasks').get().then(function(response) {
+            TasksService.findAll(function(response) {
                 $scope.tasks = response;
-            }, null)
+            });
         };
 
         $scope.remove = function(taskId, index) {
-            Restangular.one('tasks').one('remove').customPOST(
-                undefined,
-                undefined,
-                {taskId: taskId},
-                {"Content-Type":"application/json"}
-                ).then(function(response){
-                    $scope.tasks = [];
-                    $scope.findAll();
-                },null)        
+            TasksService.remove(taskId,function(response){
+                $scope.tasks = [];
+                $scope.findAll();
+            })        
         };
 
         $scope.findAll();

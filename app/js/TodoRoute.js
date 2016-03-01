@@ -4,7 +4,9 @@
 var todoListApp = angular.module('todoList', [
   'ngRoute',
   'todoControllers',
+  'todoTasksServices',
   'restangular'
+  
 ]).
 config(['$routeProvider', function($routeProvider) {
   $routeProvider.
